@@ -5,7 +5,7 @@ session_start();
 $mysqli = new mysqli('localhost', 'root', '', 'pc2' ) or die(mysqli_error($mysqli));
 
 $id = 0;
-$name = '';
+$name = 'test';
 $picture = '';
 $price = 0;
 $total = 0;
@@ -15,9 +15,9 @@ $amount = 0;
 
 $update = false;
 $show = false;
+$show_receipt = false;
 
 $location = '';
-
 
 
 //add
@@ -109,16 +109,18 @@ if (isset($_GET['addtoshakeys'])){
   $id = $_GET['addtoshakeys'];
   $update = true;
   $result = $mysqli->query("SELECT * FROM shakeys WHERE id=$id") or die($mysqli->error);
-if (count($result)==1){
-  $row = $result->fetch_array();
+  if (count($result)==1){
+    $row = $result->fetch_array();
 
-  $name = $row['name'];
-  $picture = $row['picture'];
-  $price = $row['price'];
-  }
+    $name = $row['name'];
+    $picture = $row['picture'];
+    $amount = $row['amount'];
+    $price = $row['price'];
+    $total = $row['price'] * $row['amount'];
+    }
 
 
-$mysqli->query("INSERT INTO cart (name, picture, price) VALUES('$name', '$picture', '$price') ") or die($mysqli->error);
+$mysqli->query("INSERT INTO cart (name, picture, amount, price, total) VALUES('$name', '$picture','$amount', '$price', '$total') ") or die($mysqli->error);
 
 $_SESSION['message'] = "RECORD has been updated";
 $_SESSION['msg_type'] = "warning";
@@ -137,11 +139,13 @@ if (count($result)==1){
 
   $name = $row['name'];
   $picture = $row['picture'];
+  $amount = $row['amount'];
   $price = $row['price'];
+  $total = $row['price'] * $row['amount'];
   }
 
 
-$mysqli->query("INSERT INTO cart (name, picture, price) VALUES('$name', '$picture', '$price') ") or die($mysqli->error);
+$mysqli->query("INSERT INTO cart (name, picture, amount, price, total) VALUES('$name', '$picture','$amount', '$price', '$total') ") or die($mysqli->error);
 
 $_SESSION['message'] = "RECORD has been updated";
 $_SESSION['msg_type'] = "warning";
@@ -191,3 +195,8 @@ if (isset($_POST['changeamount'])){
   $result = $mysqli->query("SELECT SUM(total) AS value_sum FROM cart");
   $row = $result->fetch_array();
   $sum = $row['value_sum'];
+
+if (isset($_GET['receipt'])){
+  $show_receipt = $_GET['receipt'];
+  $show_receipt = true;
+}

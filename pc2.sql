@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2021 at 06:47 AM
+-- Generation Time: May 14, 2021 at 02:42 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -54,6 +54,7 @@ CREATE TABLE `caesars` (
   `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `picture` varchar(100) NOT NULL,
+  `amount` int(255) NOT NULL,
   `price` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -61,9 +62,9 @@ CREATE TABLE `caesars` (
 -- Dumping data for table `caesars`
 --
 
-INSERT INTO `caesars` (`id`, `name`, `picture`, `price`) VALUES
-(6, 'Caesars family pizza', 'assets/img/caesars/large.jpg', 157),
-(7, 'Caesars single pizza', 'assets/img/caesars/slice.jpg', 25);
+INSERT INTO `caesars` (`id`, `name`, `picture`, `amount`, `price`) VALUES
+(6, 'Caesars family pizza', 'assets/img/caesars/large.jpg', 1, 157),
+(7, 'Caesars single pizza', 'assets/img/caesars/slice.jpg', 1, 25);
 
 -- --------------------------------------------------------
 
@@ -86,8 +87,9 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `name`, `picture`, `amount`, `price`, `total`) VALUES
 (544, 'Bianos Meaty meat pizza', 'assets/img/bianos/meat.jpg', 2, 40, 80),
-(545, 'Bianos Cheesy cheese pizza', 'assets/img/bianos/cheese.jpg', 4, 60, 240),
-(549, 'Bianos Cheesy cheese pizza', 'assets/img/bianos/cheese.jpg', 1, 60, 60);
+(563, 'Caesars family pizza', 'assets/img/caesars/large.jpg', 3, 157, 471),
+(565, 'Bianos Meaty meat pizza', 'assets/img/bianos/meat.jpg', 2, 40, 80),
+(567, 'Caesars single pizza', 'assets/img/caesars/slice.jpg', 1, 25, 25);
 
 -- --------------------------------------------------------
 
@@ -126,6 +128,7 @@ CREATE TABLE `shakeys` (
   `id` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `picture` varchar(100) NOT NULL,
+  `amount` int(255) NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -133,9 +136,9 @@ CREATE TABLE `shakeys` (
 -- Dumping data for table `shakeys`
 --
 
-INSERT INTO `shakeys` (`id`, `name`, `picture`, `price`) VALUES
-(3, 'Shakeys hawaiian pizza', 'assets/img/shakeys/hawaiian.jpg\r\n', 89),
-(4, 'Shakeys supreme pizza', 'assets/img/shakeys/supreme.jpg', 95);
+INSERT INTO `shakeys` (`id`, `name`, `picture`, `amount`, `price`) VALUES
+(3, 'Shakeys hawaiian pizza', 'assets/img/shakeys/hawaiian.jpg\r\n', 1, 89),
+(4, 'Shakeys supreme pizza', 'assets/img/shakeys/supreme.jpg', 1, 95);
 
 --
 -- Indexes for dumped tables
@@ -191,7 +194,7 @@ ALTER TABLE `caesars`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=550;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
 
 --
 -- AUTO_INCREMENT for table `data`

@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Sticky Footer Navbar Template · Bootstrap</title>
+    <title>Pizza Central 2 - Shakeys</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
@@ -118,33 +118,33 @@
         <h3> Pizza  </h3>
       </div>
       <div class="col my-col">
-        <h3>holder_picture</h3>
+        <h3> Picture  </h3>
       </div>
       <div class="col my-col">
-        <h3>price</h3>
+        <h3> Price </h3>
       </div>
       <div class="col my-col">
-        <h3>holder_buttons</h3>
       </div>
     </div>
   <?php while ($row = $result->fetch_assoc()): ?>
-    <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <div class="row" style="text-align: center;">
-      <div class="col">
-        <p> <?php echo $row['name']; ?> </p>
+    <form class="" action="process.html" method="post">
+      <input type="hidden" name="id" value="<?php echo $id; ?>">
+      <div class="row" style="text-align: center;">
+        <div class="col">
+          <p> <?php echo $row['name']; ?> </p>
+        </div>
+        <div class="col">
+          <img src="<?php echo $row['picture']; ?>" alt="">
+        </div>
+        <div class="col">
+          <p> <?php echo $row['price']; ?></p>
+        </div>
+        <div class="col">
+            <a href="shakeys.php?addtoshakeys=<?php echo $row['id']; ?>" class="btn btn-info"> Add </a>
+        </div>
       </div>
-      <div class="col">
-        <img src="<?php echo $row['picture']; ?>" alt="">
-      </div>
-      <div class="col">
-        <p> <?php echo $row['price']; ?></p>
-      </div>
-      <div class="col">
-        <a href="bianos.php?addtoshakeys=<?php echo $row['id']; ?>" class="btn btn-info"> Add </a>
-      </div>
-    </div>
-    <?php endwhile; ?>
-  </form>
+      <?php endwhile; ?>
+    </form>
 </div>
 
 <br>

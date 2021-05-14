@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Pizza Central 2</title>
+    <title>Pizza Central 2 - Cart</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
@@ -101,6 +101,7 @@
 <?php
   $mysqli = new mysqli('localhost', 'root', '', 'pc2') or die(mysqli_error($mysqli));
   $result = $mysqli->query("SELECT * FROM cart") or die($mysqli->error);
+  $result1 = $mysqli->query("SELECT * FROM cart") or die($mysqli->error);
   //pre_r($result);
   ?>
 
@@ -115,7 +116,6 @@
           <div class="col"><h4> Price </h4></div>
           <div class="col"><h4> Amount </h4></div>
           <div class="col"><h4> Action </h4></div>
-          <div class="col"><h4> Sum (delete after) </h4></div>
         </div>
       </div>
 
@@ -128,39 +128,30 @@
             <div class="col"> <?php echo $row['price']; ?> </div>
             <div class="form-group col">
 
-            <?php if ($update == true): //change this btw?>
-
+            <?php if ($update == true):?>
                   <div class="col">
                     <div class="row" style="margin: -5px;">
-
-                        <div class="col-10 my-col"  style="margin-right: -15px;">
+                      <div class="col-10 my-col"  style="margin-right: -15px;">
                           <input type="text" name="amount" class="form-control" value="<?php echo $row['amount'];?>" placeholder="enter amount" style="" >
-                        </div>
-
-                        <div class="col-2">
+                      </div>
+                      <div class="col-2">
                           <button type="submit" name="changeamount" class="btn btn-info" style="margin-left: -10px;"  >Change</button>
-                        </div>
-                      
-
+                      </div>
                     </div>
                   </div>
-                <?php else: ?>
-                  <div class="col">
-                    <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <?php echo $row['amount']; ?> </a></div>
-
+            <?php else: ?>
+                <div class="col">
+                  <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <?php echo $row['amount']; ?> </a></div>
+                </div>
             <?php endif; ?>
-            </div>
-
 
             <div class="col" style="margin: -5px;">
                  <a href="process.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
             </div>
-
-            <div class="col"> <?php echo $row['total']; ?> </div>
           </div>
         </form>
-      <?php endwhile; ?>
 
+        <?php endwhile; ?>
     </div>
   </div>
 
@@ -180,40 +171,33 @@
 
 <div class="container my-container">
   <div class="">
-    <a href="#" class="btn btn-info">show receipt</a>
-    <p>Total: <?php echo $sum ?> pesos</p>
+    <?php if ($show_receipt == false):?>
+      <a href="cart.php?receipt=<?php echo $show_receipt; ?>" class="btn btn-info">Show receipt</a>
+    <?php else: ?>
+      <br>
+      <div class="row">
+        <div class="col-3">  Name  </div>
+        <div class="col-2"> Amount </div>
+        <div class="col-2"> Price </div>
+        <div class="col-5"> </div>
+      </div>
+      <br>
+      <div class="row">
+        <?php while ($row = $result1->fetch_assoc()): ?>
+          <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+          <div class="col-3"> <?php echo $row['name']; ?> </div>
+          <div class="col-2"> <?php echo $row['amount']; ?> </div>
+          <div class="col-2"> <?php echo $row['price']; ?> </div>
+          <div class="col-5"> </div>
+        <?php endwhile; ?>
+      </div>
+      <br>
+      <p>Total: <?php echo $sum ?> pesos</p>
+    <?php endif; ?>
   </div>
 </div>
 
 
-
-
-<div class="container">
-  <br>
-  <br>
-
-  <div class="row justify-content-center">
-    <form class="" action="process.php" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <div class="form-group">
-        <label for="">Name</label>
-        <input type="text" name="name" class="form-control" value="<?php echo $name;?>" placeholder="Enter your name">
-      </div>
-      <div class="form-group">
-        <label for="">Location</label>
-        <input type="text" name="location" class="form-control"value="<?php echo $location; ?>" placeholder="Enter your location">
-      </div>
-      <div class="form-group">
-        <?php if ($update == true): ?>
-          <button type="submit" name="update" class="btn btn-info" >Update</button>
-        <?php else: ?>
-          <button type="submit" name="save" class="btn btn-primary" >Save</button>
-        <?php endif; ?>
-      </div>
-    </div>
-  </form>
-
-</div>
 
 
 

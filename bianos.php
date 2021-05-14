@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Pizza Central 2</title>
+    <title>Pizza Central 2 - Bianos</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
@@ -118,16 +118,12 @@
         <h3> Pizza  </h3>
       </div>
       <div class="col my-col">
-        <h3>holder_picture</h3>
+        <h3> Picture  </h3>
       </div>
       <div class="col my-col">
-        <h3>price</h3>
+        <h3> Price </h3>
       </div>
       <div class="col my-col">
-        <h3>holder_buttons</h3>
-      </div>
-      <div class="col my-col">
-        <h3>no.</h3>
       </div>
     </div>
   <?php while ($row = $result->fetch_assoc()): ?>
@@ -146,9 +142,6 @@
       <div class="col">
           <a href="bianos.php?addtobianos=<?php echo $row['id']; ?>" class="btn btn-info"> Add </a>
       </div>
-      <div class="col">
-        <p> <?php echo $row['amount']; ?></p>
-      </div>
     </div>
     <?php endwhile; ?>
   </form>
@@ -164,6 +157,8 @@
     <span class="text-muted">All rights reserved</span>
   </div>
 </footer>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
