@@ -10,8 +10,11 @@ $picture = '';
 $price = 0;
 $total = 0;
 $random = "Test display";
+$cart_total = 0;
+$order_total = 0;
 
 $amount = 0;
+$order_no = 0;
 
 $update = false;
 $show = false;
@@ -70,9 +73,6 @@ if (isset($_POST['update'])){
   $_SESSION['msg_type'] = "warning";
   header('location: bianos.php');
 }
-
-
-
 
 //bianos to cart
 
@@ -189,14 +189,51 @@ if (isset($_POST['changeamount'])){
   header('location: cart.php');
 }
 
+//sum of Cart
+$result = $mysqli->query("SELECT SUM(total) AS value_sum FROM cart");
+$row = mysqli_fetch_assoc($result);
+$cart_total = $row['value_sum'];
+
+$result = $mysqli->query("SELECT SUM(total) AS value_sum FROM orders");
+$row = mysqli_fetch_assoc($result);
+$order_total = $row['value_sum'];
 
 //RECEIPT
 
-  $result = $mysqli->query("SELECT SUM(total) AS value_sum FROM cart");
-  $row = $result->fetch_array();
-  $sum = $row['value_sum'];
+if (isset($_GET['addtoorders'])){
+  $id = $_GET['addtoorders'];
 
-if (isset($_GET['receipt'])){
-  $show_receipt = $_GET['receipt'];
   $show_receipt = true;
+
+  $mysqli->query("DELETE FROM orders") or die($mysqli->error);
+  $result1 = $mysqli->query("SELECT * FROM cart") or die($mysqli->error);
+
+    if (count($result1)==1){
+      while ($row = $result1->fetch_assoc()) {
+        $id = $row['id'];
+        $name = $row['name'];
+        $amount = $row['amount'];
+        $price = $row['price'];
+        $total = $row['total'];
+
+        $mysqli->query("INSERT INTO orders (name, amount, price, total) VALUES('$name','$amount', '$price', '$total') ") or die($mysqli->error);
+      }
+  }
+
+$mysqli->query("DELETE FROM cart") or die($mysqli->error);
+
+  $_SESSION['message'] = "Added to orders";
+  $_SESSION['msg_type'] = "warning";
+  header('location: orders.php');
+
+}
+
+//to remove all items from order and go back to index
+if(isset($_GET['clear'])){
+
+  $mysqli->query("DELETE FROM orders") or die($mysqli->error);
+
+  $_SESSION['message'] = "Thank you for ordering at pizza central 2";
+  $_SESSION['msg_type'] = "success";
+  header('location: index.php');
 }

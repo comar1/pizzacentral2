@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2021 at 02:42 PM
+-- Generation Time: May 21, 2021 at 01:25 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.32
 
@@ -81,16 +81,6 @@ CREATE TABLE `cart` (
   `total` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `name`, `picture`, `amount`, `price`, `total`) VALUES
-(544, 'Bianos Meaty meat pizza', 'assets/img/bianos/meat.jpg', 2, 40, 80),
-(563, 'Caesars family pizza', 'assets/img/caesars/large.jpg', 3, 157, 471),
-(565, 'Bianos Meaty meat pizza', 'assets/img/bianos/meat.jpg', 2, 40, 80),
-(567, 'Caesars single pizza', 'assets/img/caesars/slice.jpg', 1, 25, 25);
-
 -- --------------------------------------------------------
 
 --
@@ -117,6 +107,28 @@ INSERT INTO `data` (`id`, `name`, `location`) VALUES
 (15, '', ''),
 (16, '', ''),
 (17, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` int(255) NOT NULL,
+  `amount` int(255) NOT NULL,
+  `total` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `name`, `price`, `amount`, `total`) VALUES
+(95, 'Caesars family pizza', 157, 1, 157),
+(96, 'Caesars family pizza', 157, 1, 157);
 
 -- --------------------------------------------------------
 
@@ -169,6 +181,12 @@ ALTER TABLE `data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `shakeys`
 --
 ALTER TABLE `shakeys`
@@ -194,13 +212,19 @@ ALTER TABLE `caesars`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=568;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=619;
 
 --
 -- AUTO_INCREMENT for table `data`
 --
 ALTER TABLE `data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `shakeys`

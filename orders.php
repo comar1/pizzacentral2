@@ -6,14 +6,18 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Pizza Central 2 - Caesars</title>
+    <title>Pizza Central 2 - Cart</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
     <!-- Bootstrap core CSS -->
-<link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <!-- php -->
+
+
+    <!-- styles -->
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -67,7 +71,7 @@
           <a class="nav-link" href="shakeys.php">Shakeys</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Caesar's</a>
+          <a class="nav-link" href="caesars.php">Caesar's</a>
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
@@ -82,7 +86,7 @@
 <br>
 <!-- Begin page content -->
 
-<?php require_once 'process.php' ?>
+<?php require_once 'process.php'  ?>
 
 <?php if (isset($_SESSION['message'])): ?>
 
@@ -97,59 +101,66 @@
 
 <?php
   $mysqli = new mysqli('localhost', 'root', '', 'pc2') or die(mysqli_error($mysqli));
-  $result = $mysqli->query("SELECT * FROM caesars") or die($mysqli->error);
+  $result = $mysqli->query("SELECT * FROM orders") or die($mysqli->error);
+  $result1 = $mysqli->query("SELECT * FROM orders") or die($mysqli->error);
   //pre_r($result);
   ?>
 
-<main role="main" class="flex-shrink-0">
-  <div class="container">
-    <h1 class="mt-5" style="text-align: left;">CAESAR'S PIZZA</h1>
-    <p class="lead" style="text-align: left;">Choose a pizza to add to cart! </p>
+  <div class="container my-container ">
+    <br>
+    <br>
+    <h2>Receipt</h2> <br><br>
+            <div>
+              <div>
+                <div class="row" style="text-align: left">
+                  <div class="col"> <h4> Name </h4></div>
+                  <div class="col"><h4> Price </h4></div>
+                  <div class="col"><h4> Amount </h4></div>
+                  <div class="col"><h4>  </h4></div>
+                </div>
+              </div>
+              <br>
+              <?php while ($row = $result->fetch_assoc()): ?>
+                <form class="" action="process.php" method="post">
+                  <div class="row" style="text-align: left">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <div class="col"> <?php echo $row['name']; ?> </div>
+                    <div class="col"> <?php echo $row['price']; ?> </div>
+                    <div class="col"><?php echo $row['amount'];?></div>
+                    <div class="col" style="margin: -5px;"></div>
+                  </div>
+                </form>
 
+                <?php endwhile; ?>
+            </div>
   </div>
-</main>
 
-<br>
-<br>
+  <?php
+  pre_r($result->fetch_assoc());
 
-<div class="container my-container justify content center">
-  <form class="" action="process.php" method="post">
-    <div class="row ">
-      <div class="col my-col">
-        <h3> Pizza  </h3>
+  function pre_r($array){
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+  }
+?>
+
+<div class="container my-container">
+      <div class=" " style="text align:'right';">
+        <h3 class="mt-5"> Total: <?php echo $order_total ?> pesos </h3>
       </div>
-      <div class="col my-col">
-        <h3> Picture  </h3>
+      <br>
+      <div class=" ">
+        <a href="orders.php?clear" class="btn btn-danger">Ok</a>
       </div>
-      <div class="col my-col">
-        <h3> Price </h3>
-      </div>
-      <div class="col my-col">
-      </div>
-    </div>
-  <?php while ($row = $result->fetch_assoc()): ?>
-    <form class="" action="process.html" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <div class="row" style="text-align: center;">
-        <div class="col">
-          <p> <?php echo $row['name']; ?> </p>
-        </div>
-        <div class="col">
-          <img src="<?php echo $row['picture']; ?>" alt="">
-        </div>
-        <div class="col">
-          <p> <?php echo $row['price']; ?></p>
-        </div>
-        <div class="col">
-            <a href="caesars.php?addtocaesars=<?php echo $row['id']; ?>" class="btn btn-info"> Add </a>
-        </div>
-      </div>
-      <?php endwhile; ?>
-    </form>
 </div>
 
-<br>
-<br>
+
+
+  </div>
+</div>
+
+
 
 
 

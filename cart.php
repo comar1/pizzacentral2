@@ -76,6 +76,7 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
   </nav>
@@ -108,51 +109,56 @@
   <div class="container my-container justify content center">
     <br>
     <br>
-    <div>
-      <div>
-        <div class="row" style="text-align: center">
-          <div class="col"> <h4> Name </h4></div>
-          <div class="col"><h4> Picture </h4></div>
-          <div class="col"><h4> Price </h4></div>
-          <div class="col"><h4> Amount </h4></div>
-          <div class="col"><h4> Action </h4></div>
-        </div>
-      </div>
+            <div>
+              <div>
+                <div class="row" style="text-align: center">
+                  <div class="col"> <h4> Name </h4></div>
+                  <div class="col"><h4> Picture </h4></div>
+                  <div class="col"><h4> Price </h4></div>
+                  <div class="col"><h4> Amount </h4></div>
+                  <div class="col"><h4> Action </h4></div>
+                </div>
+              </div>
+              <br>
+              <?php while ($row = $result->fetch_assoc()): ?>
+                <form class="" action="process.php" method="post">
+                  <div class="row" style="text-align: center">
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <div class="col" style="text-align: left"> <?php echo $row['name']; ?> </div>
+                    <div class="col"> <img src="<?php echo $row['picture']; ?>" alt=""> </div>
+                    <div class="col"> <?php echo $row['price']; ?> </div>
+                    <div class="form-group col">
 
-      <?php while ($row = $result->fetch_assoc()): ?>
-        <form class="" action="process.php" method="post">
-          <div class="row" style="text-align: center">
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <div class="col"> <?php echo $row['name']; ?> </div>
-            <div class="col"> <img src="<?php echo $row['picture']; ?>" alt=""> </div>
-            <div class="col"> <?php echo $row['price']; ?> </div>
-            <div class="form-group col">
+                    <?php if ($update == true):?>
+                      <div class="col">
+                        <div class="row" style="margin: -5px;">
+                          <div class="col-10 my-col"  style="margin-right: -15px;">
+                              <input type="text" name="amount" class="form-control" value="<?php echo $row['amount'];?>" placeholder="enter amount" style="" >
+                          </div>
+                          <div class="col-2">
+                              <button type="submit" name="changeamount" class="btn btn-info" style="margin-left: -10px;"  >Change</button>
+                          </div>
+                        </div>
+                      </div>
+                    <?php else: ?>
+                      <div class="col">
+                        <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <?php echo $row['amount']; ?> </a>
+                      </div>
 
-            <?php if ($update == true):?>
-                  <div class="col">
-                    <div class="row" style="margin: -5px;">
-                      <div class="col-10 my-col"  style="margin-right: -15px;">
-                          <input type="text" name="amount" class="form-control" value="<?php echo $row['amount'];?>" placeholder="enter amount" style="" >
-                      </div>
-                      <div class="col-2">
-                          <button type="submit" name="changeamount" class="btn btn-info" style="margin-left: -10px;"  >Change</button>
-                      </div>
+                    <?php endif; ?>
+                    </div>
+                    <div class="col" style="margin: -5px;">
+                         <a href="process.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
                     </div>
                   </div>
-            <?php else: ?>
-                <div class="col">
-                  <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <?php echo $row['amount']; ?> </a></div>
-                </div>
-            <?php endif; ?>
+                </form>
 
-            <div class="col" style="margin: -5px;">
-                 <a href="process.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a>
+                <?php endwhile; ?>
             </div>
-          </div>
-        </form>
-
-        <?php endwhile; ?>
-    </div>
+            <div class="col">
+              <br><br>
+              <h4>Total: <?php echo $cart_total ?> pesos</h4>
+            </div>
   </div>
 
   <?php
@@ -167,33 +173,36 @@
 
 <div class="container">
   <h3 class="mt-5"> Receipt </h3>
-</div>
 
+</div>
+<br>
 <div class="container my-container">
   <div class="">
-    <?php if ($show_receipt == false):?>
-      <a href="cart.php?receipt=<?php echo $show_receipt; ?>" class="btn btn-info">Show receipt</a>
-    <?php else: ?>
-      <br>
-      <div class="row">
-        <div class="col-3">  Name  </div>
-        <div class="col-2"> Amount </div>
-        <div class="col-2"> Price </div>
-        <div class="col-5"> </div>
-      </div>
-      <br>
-      <div class="row">
-        <?php while ($row = $result1->fetch_assoc()): ?>
-          <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-          <div class="col-3"> <?php echo $row['name']; ?> </div>
-          <div class="col-2"> <?php echo $row['amount']; ?> </div>
-          <div class="col-2"> <?php echo $row['price']; ?> </div>
+    <form class="" action="process.php" method="post">
+      <?php if ($show_receipt == false):?>
+        <a href="orders.php?addtoorders=<?php echo $show_receipt ?>" class="btn btn-info">Checkout</a>
+      <?php else: ?>
+        <br>
+        <div class="row">
+          <div class="col-3">  Name  </div>
+          <div class="col-2"> Amount </div>
+          <div class="col-2"> Price </div>
           <div class="col-5"> </div>
-        <?php endwhile; ?>
-      </div>
-      <br>
-      <p>Total: <?php echo $sum ?> pesos</p>
-    <?php endif; ?>
+        </div>
+        <br>
+        <div class="row">
+          <?php while ($row = $result1->fetch_assoc()): ?>
+            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+            <div class="col-3"> <?php echo $row['name']; ?> </div>
+            <div class="col-2"> <?php echo $row['amount']; ?> </div>
+            <div class="col-2"> <?php echo $row['total']; ?> </div>
+            <div class="col-5"> </div>
+          <?php endwhile; ?>
+        </div>
+        <br>
+
+      <?php endif; ?>
+    </form>
   </div>
 </div>
 

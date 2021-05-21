@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Sticky Footer Navbar Template · Bootstrap</title>
+    <title>Pizza Central 2: Electric Boogaloo</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
@@ -72,6 +72,7 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
   </nav>
@@ -110,7 +111,10 @@
   <br>
   <br>
 
-  <div class=""> <p>Already ordered? Check your <a href="cart.php">cart</a> here!</p> </div>
+  <div class="">
+    <p>Already ordered? Check your <a href="cart.php">cart</a> here!</p>
+    <p>Check your orders <a href="orders.php">here</a>. </p>
+  </div>
 </div>
 
 

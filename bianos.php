@@ -72,6 +72,7 @@
       </ul>
       <form class="form-inline mt-2 mt-md-0">
         <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
   </nav>
