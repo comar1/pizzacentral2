@@ -71,7 +71,7 @@
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" style="margin-right:10px" href="cart.php">Check your Cart</a>
         <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
@@ -97,13 +97,13 @@
 
   <div class="row">
     <div class="col">
-      <a href="bianos.php"><img src="assets/img/bianos.jpg" alt=""></a>
+      <a href="bianos.php"><img src="assets/img/bianos.jpg" alt="" style="padding-top:45px"></a>
     </div>
     <div class="col">
       <a href="shakeys.php"><img src="assets/img/shakeys.jpg" alt=""></a>
     </div>
     <div class="col">
-      <a href="caesars.php"> <img src="assets/img/caesars.jpg" alt=""></a>
+      <a href="caesars.php"> <img src="assets/img/caesars.jpg" alt="" style="padding-top:45px"></a>
     </div>
   </div>
 

@@ -75,7 +75,7 @@
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" style="margin-right:10px" href="cart.php">Check your Cart</a>
         <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
@@ -125,8 +125,8 @@
                   <div class="row" style="text-align: left">
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="col"> <?php echo $row['name']; ?> </div>
-                    <div class="col"> <?php echo $row['price']; ?> </div>
-                    <div class="col"><?php echo $row['amount'];?></div>
+                    <div class="col"><p> ₱<?php echo $row['price']; ?> </p></div>
+                    <div class="col"><p>x<?php echo $row['amount'];?></p></div>
                     <div class="col" style="margin: -5px;"></div>
                   </div>
                 </form>
@@ -147,11 +147,11 @@
 
 <div class="container my-container">
       <div class=" " style="text align:'right';">
-        <h3 class="mt-5"> Total: <?php echo $order_total ?> pesos </h3>
+        <h3 class="mt-5"> Total Amount: ₱<?php echo $order_total ?>  </h3>
       </div>
       <br>
       <div class=" ">
-        <a href="orders.php?clear" class="btn btn-danger">Ok</a>
+        <a href="orders.php?clear" class="btn btn-danger">Confirm Order</a>
       </div>
 </div>
 

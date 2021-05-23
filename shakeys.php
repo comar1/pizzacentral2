@@ -71,7 +71,7 @@
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" style="margin-right:10px" href="cart.php">Check your Cart</a>
         <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
@@ -103,51 +103,40 @@
 
 <main role="main" class="flex-shrink-0">
   <div class="container">
-    <h1 class="mt-5" style="text-align: left;">SHAKEYS'S PIZZA</h1>
-    <p class="lead" style="text-align: left;">Choose a pizza to add to cart! </p>
+    <h1 class="mt-5" style="text-align: center;">SHAKEYS'S PIZZA</h1>
+    <p class="lead" style="text-align: center;">Choose a pizza to add to cart! </p>
 
   </div>
 </main>
 
 <br>
 <br>
-
-<div class="container my-container justify content center">
+<div class="container my-container justify content center" >
   <form class="" action="process.php" method="post">
-    <div class="row ">
-      <div class="col my-col">
-        <h3> Pizza  </h3>
-      </div>
-      <div class="col my-col">
-        <h3> Picture  </h3>
-      </div>
-      <div class="col my-col">
-        <h3> Price </h3>
-      </div>
-      <div class="col my-col">
-      </div>
-    </div>
   <?php while ($row = $result->fetch_assoc()): ?>
-    <form class="" action="process.html" method="post">
-      <input type="hidden" name="id" value="<?php echo $id; ?>">
-      <div class="row" style="text-align: center;">
-        <div class="col">
+  <form class="" action="process.html" method="post">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <div class="row" style="text-align:left;border:none;margin-bottom:10px">
+      <div class="col-4">
+        <img src="<?php echo $row['picture']; ?>" alt="" style="">
+      </div>
+      <div class="col" style="height:150px">
+        <div class="col text-left">
           <p> <?php echo $row['name']; ?> </p>
         </div>
-        <div class="col">
-          <img src="<?php echo $row['picture']; ?>" alt="">
-        </div>
-        <div class="col">
-          <p> <?php echo $row['price']; ?></p>
-        </div>
-        <div class="col">
-            <a href="shakeys.php?addtoshakeys=<?php echo $row['id']; ?>" class="btn btn-info"> Add </a>
+        <div class="row" style="padding-left:15px">
+          <div class="col">
+            <p style="font-weight:bold"> Starts at ₱ <?php echo $row['price']; ?></p>
+          </div>
+          <div class="col-3" style="align-items:right"> 
+            <a href="shakeys.php?addtoshakeys=<?php echo $row['id']; ?>" class="btn btn-info">Add to Cart</a>
+          </div>
         </div>
       </div>
-      <?php endwhile; ?>
-    </form>
+    </div>
+    <?php endwhile; ?>
+  </form>
 </div>
-
 <br>
 <br>
 

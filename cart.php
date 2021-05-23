@@ -75,7 +75,7 @@
         </li>
       </ul>
       <form class="form-inline mt-2 mt-md-0">
-        <a class="btn btn-outline-success my-2 my-sm-0" href="cart.php">Check your Cart</a>
+        <a class="btn btn-outline-success my-2 my-sm-0" style="margin-right:10px" href="cart.php">Check your Cart</a>
         <a class="btn btn-outline-success my-2 my-sm-0" href="orders.php">Orders</a>
       </form>
     </div>
@@ -112,11 +112,7 @@
             <div>
               <div>
                 <div class="row" style="text-align: center">
-                  <div class="col"> <h4> Name </h4></div>
-                  <div class="col"><h4> Picture </h4></div>
-                  <div class="col"><h4> Price </h4></div>
-                  <div class="col"><h4> Amount </h4></div>
-                  <div class="col"><h4> Action </h4></div>
+                  <div class="col"> <h1> Cart </h1></div>
                 </div>
               </div>
               <br>
@@ -124,9 +120,9 @@
                 <form class="" action="process.php" method="post">
                   <div class="row" style="text-align: center">
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
-                    <div class="col" style="text-align: left"> <?php echo $row['name']; ?> </div>
                     <div class="col"> <img src="<?php echo $row['picture']; ?>" alt=""> </div>
-                    <div class="col"> <?php echo $row['price']; ?> </div>
+                    <div class="col" style="text-align: left"> <?php echo $row['name']; ?> </div>
+                    <div class="col"><p> ₱ <?php echo $row['price']; ?> </p></div>
                     <div class="form-group col">
 
                     <?php if ($update == true):?>
@@ -142,7 +138,7 @@
                       </div>
                     <?php else: ?>
                       <div class="col">
-                        <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <?php echo $row['amount']; ?> </a>
+                        <a href="cart.php?setamount=<?php echo $row['id']; ?>"> <p>x<?php echo $row['amount']; ?> </p></a>
                       </div>
 
                     <?php endif; ?>
@@ -157,7 +153,7 @@
             </div>
             <div class="col">
               <br><br>
-              <h4>Total: <?php echo $cart_total ?> pesos</h4>
+              <h4 style="text-align:right">Total Amount:  ₱<?php echo $cart_total ?> </h4>
             </div>
   </div>
 
@@ -170,25 +166,14 @@
     echo '</pre>';
   }
 ?>
-
-<div class="container">
-  <h3 class="mt-5"> Receipt </h3>
-
-</div>
 <br>
 <div class="container my-container">
   <div class="">
     <form class="" action="process.php" method="post">
       <?php if ($show_receipt == false):?>
-        <a href="orders.php?addtoorders=<?php echo $show_receipt ?>" class="btn btn-info">Checkout</a>
+        <a href="orders.php?addtoorders=<?php echo $show_receipt ?>" class="btn btn-info float-right">Checkout</a>
       <?php else: ?>
         <br>
-        <div class="row">
-          <div class="col-3">  Name  </div>
-          <div class="col-2"> Amount </div>
-          <div class="col-2"> Price </div>
-          <div class="col-5"> </div>
-        </div>
         <br>
         <div class="row">
           <?php while ($row = $result1->fetch_assoc()): ?>
